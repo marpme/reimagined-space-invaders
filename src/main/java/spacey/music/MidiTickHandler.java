@@ -25,7 +25,7 @@ public class MidiTickHandler extends TimerTask {
     private DataTransferHandler max;
     private NoteComposer noteComposer;
     private volatile List<MidiTickListener> listeners = new LinkedList<>();
-
+    private ScheduledThreadPoolExecutor scheduler;
     /**
      * Needed for the midi ticking event, do not touch!
      */
@@ -46,12 +46,10 @@ public class MidiTickHandler extends TimerTask {
             System.exit(1);
         }
         this.noteComposer = noteComposer;
-        // this.timer = new Timer();
-        // this.timer.scheduleAtFixedRate(this, 0, );
 
-        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
+        scheduler = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
         Long nano = Math.round(ticker(noteComposer.getBPM(), noteComposer.getPPQ()) * 1_000_000L);
-        sch.scheduleAtFixedRate(this, 0,  nano, TimeUnit.NANOSECONDS);
+        scheduler.scheduleAtFixedRate(this, 0,  nano, TimeUnit.NANOSECONDS);
     }
 
     public void addEventListener(MidiTickListener listener){
@@ -68,7 +66,7 @@ public class MidiTickHandler extends TimerTask {
      */
     public void run() {
         if(this.noteComposer.getNotes().size() == 0){
-            stopTimer();
+            scheduler.shutdown();
             return;
         }
 
@@ -79,21 +77,19 @@ public class MidiTickHandler extends TimerTask {
 
         notesToPlay.forEach(mn -> {
             try{
-                listeners.forEach(listener -> listener.midiTicked(mn));
-                if(mn.getVelocity() == 0)
+
+                if(mn.getVelocity() == 0) {
                     max.sendMessage(MetaTypes.NOTE_OFF.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
-                else
+                } else {
+                    listeners.forEach(listener -> listener.midiTicked(mn));
                     max.sendMessage(MetaTypes.NOTE_ON.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
         tick++;
-    }
-
-    private void stopTimer(){
-        this.timer.cancel();
     }
 
     /**

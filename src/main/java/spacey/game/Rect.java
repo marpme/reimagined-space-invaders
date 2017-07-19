@@ -1,5 +1,7 @@
 package spacey.game;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -19,15 +21,17 @@ public class Rect {
     public float height;
     public float velocity;
 
-    public static List<Rect> listOfRect = new CopyOnWriteArrayList<>();
+    public volatile static List<Rect> listOfRect = new LinkedList<>();
 
     public Rect(float x, float y, float width, float height, float velocity) {
         this.x = x;
-        this.y = y;
+        this.y = y-height*2;
         this.width = width;
         this.height = height;
         this.velocity = velocity;
-        listOfRect.add(this);
+        synchronized (this){
+            listOfRect.add(this);
+        }
     }
 
     public synchronized void move(){

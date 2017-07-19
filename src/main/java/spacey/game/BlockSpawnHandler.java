@@ -11,7 +11,7 @@ public class BlockSpawnHandler {
         this.midiTickHandler = midiTickHandler;
         this.midiTickHandler.addEventListener(midiNote -> {
             synchronized (Rect.class){
-                new Rect(32.5f + midiNote.getKeyMapped(), -10, 65, 10, 5f);
+                new Rect(65 + midiNote.getKeyMapped(), 0, 65, 65, 10f);
             }
         });
     }

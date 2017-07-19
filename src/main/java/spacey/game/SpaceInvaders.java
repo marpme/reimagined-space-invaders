@@ -1,6 +1,7 @@
 package spacey.game;
 
 import processing.video.Movie;
+import spacey.interfaces.OSCListener;
 import spacey.music.MidiTickHandler;
 import spacey.music.NoteComposer;
 import netP5.*;
@@ -10,15 +11,10 @@ import oscP5.*;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 import java.io.File;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
-/**
- * Class description ...
- * Included in PACKAGE_NAME
- *
- * @author Marvin Piekarek (s0556014)
- * @version 1.0
- * @since 03. Jul 2017
- */
 public class SpaceInvaders extends PApplet {
 
     public OscP5 oscP5;
@@ -28,44 +24,59 @@ public class SpaceInvaders extends PApplet {
     public float velocityX = 0;
     public float speed = 5;
 
-    private static final String DACING_QUEEN = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/ABBA_-_Dancing_Queen.mid";
-    private static final String MOZART = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/sym40-1.mid";
-    private static final String BEVERLY = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/Movie_Themes_-_Beverly_Hills_Cop_-_Axel's_Theme_by_Harold_Faltermeyer.mid";
-    private static final String BACKSTREET = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/Backstreet Boys - I'll Never Break Your Heart.mid";
-    private static final String KYOTO = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/Skrillex - Kyoto (ft. Sirah).mid";
+    private static List<String> resourceList = new LinkedList<>();
 
-    private static final String SPACER = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/spacey/game/spacer.svg";
-    private static final String BG = "/Users/marvinpiekarek/Desktop/development/SpaceInvaders/src/main/resources/spacey/game/background.mov";
-    private PShape shape;
-    private Movie movie;
+    private static final String DACING_QUEEN = SpaceInvaders.class.getResource("ABBA_-_Dancing_Queen.mid").getPath();
+    private static final String MOZART = SpaceInvaders.class.getResource("sym40-1.mid").getPath();
+    private static final String BEVERLY = SpaceInvaders.class.getResource("Movie_Themes_-_Beverly_Hills_Cop_-_Axel's_Theme_by_Harold_Faltermeyer.mid").getPath();
+    private static final String BACKSTREET = SpaceInvaders.class.getResource("Backstreet_Boys_I'll_Never_Break_Your_Heart.mid").getPath();
+    private static final String KYOTO = SpaceInvaders.class.getResource("Skrillex_Kyoto_(ft._Sirah).mid").getPath();
+
+    private static final String SPACER = SpaceInvaders.class.getResource("spacer.svg").getPath();
+
+    public static String getNOTE() {
+        return NOTE;
+    }
+
+    private static final String NOTE = SpaceInvaders.class.getResource("musical-note.svg").getPath();
+    private static final String BG = SpaceInvaders.class.getResource("bg.jpg").getPath();
+
+    private PShape spaceMan;
+    private PShape musicNote;
+    private PImage bg;
 
     public static void main(String... args) {
-        PApplet.main("spacey.game.SpaceInvaders");
+        PApplet.main(SpaceInvaders.class);
     }
 
     @Override
     public void settings() {
         super.settings();
-        size(845,400);
+        size(845,500);
     }
 
     @Override
     public void setup() {
-        frameRate(60);
-        // oscP5 = new OscP5(this, 9455);
-        // oscP5.addListener(new OscEventListener(this));
-        // myRemoteLocation = new NetAddress("141.45.206.178", 8455);
-        shape = this.loadShape(SPACER);
-        shape.disableStyle();
-        movie = new Movie(this, BG);
-        movie.loop();
+        frameRate(30);
+        oscP5 = new OscP5(this, 9455);
+        oscP5.addListener(new OSCListener(this));
+        myRemoteLocation = new NetAddress("192.168.178.35", 8455);
+
+        spaceMan = this.loadShape(SpaceInvaders.getSPACER());
+        spaceMan.disableStyle();
+
+        musicNote = this.loadShape(SpaceInvaders.getNOTE());
+        musicNote.disableStyle();
+        musicNote.setFill(255);
+
+        bg = loadImage(BG);
 
         rectMode(CENTER);
         x = .50f * this.width;
         y = .92f * this.height;
 
         try{
-            Sequence sequence = MidiSystem.getSequence(new File(BEVERLY));
+            Sequence sequence = MidiSystem.getSequence(new File(SpaceInvaders.getRandomTrack()));
             NoteComposer noteComposer = new NoteComposer(sequence);
             MidiTickHandler TickHandler = new MidiTickHandler(noteComposer);
             BlockSpawnHandler spawnHandler = new BlockSpawnHandler(TickHandler);
@@ -77,38 +88,47 @@ public class SpaceInvaders extends PApplet {
 
     @Override
     public void draw() {
-        background(0);
-        image(movie, 0, 0, this.width, this.height);
+        background(255);
+        image(this.bg, 0, 0, this.width, this.height);
         this.x += velocityX;
 
         fill(94, 232, 215);
-        shape(shape, this.x - shape.width/2f, this.y- shape.height/2f, 85.6f/2f, 68.48f/2f);
+        shape(spaceMan, this.x - spaceMan.width/2f, this.y - spaceMan.height/2f, 85.6f/2f, 68.48f/2f);
 
-        //Rect.listOfRect.parallelStream().filter(rect -> rect.isOutOfWindow(this.height)).forEach(Rect::remove);
         for (int i = Rect.listOfRect.size() - 1; i >= 0; i--) {
             if(Rect.listOfRect.get(i).isOutOfWindow(this.height))
                 Rect.listOfRect.remove(i);
+            else
+                break;
         }
 
-        Rect.listOfRect.forEach(Rect::move);
-        fill(255,255,255);
-        Rect.listOfRect.forEach(k -> rect(k.x, k.y, k.width, k.height));
-        /*if(Rect.listOfRect.stream()
-                .filter(rect -> rect.inBounds(this.x, this.y, 10))
-                .count() >= 1) {
-            finished = true;
-        }*/
-        // text("Framerate: " + frameRate, 10, 10);
-    }
-
-    // Called every time a new frame is available to read
-    void movieEvent(Movie m) {
-        m.read();
+        fill(255);
+        for (Rect next : Rect.listOfRect) {
+            next.move();
+            shape(musicNote, next.x, next.y, 50, 50);
+        }
     }
 
     public void sendUpdate(float speed) {
         OscMessage k = new OscMessage("/1/speed");
         k.add(speed);
         oscP5.send(k, myRemoteLocation);
+    }
+
+    static {
+        resourceList.addAll(Arrays.asList(DACING_QUEEN ,MOZART, BEVERLY, BACKSTREET, KYOTO));
+    }
+
+    public static String getRandomTrack() {
+        int len = resourceList.size();
+        return resourceList.get((int) (Math.random() * len));
+    }
+
+    public static String getSPACER() {
+        return SPACER;
+    }
+
+    public static String getBG() {
+        return BG;
     }
 }
