@@ -4,14 +4,13 @@ import javax.sound.midi.ShortMessage;
 import java.util.Arrays;
 
 public class MidiNote implements Comparable<MidiNote> {
+    private static String[] notesName = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"};
     private long tick;
     private int channel;
     private int key;
     private int velocity;
     private String note;
     private ShortMessage cmd;
-
-    private static String[] notesName = new String[]{"C", "C#", "D", "D#","E","F","F#","G","G#", "A", "A#","H"};
 
     public MidiNote(long tick, int channel, int key, int velocity, ShortMessage cmd) {
         this.tick = tick;
@@ -36,25 +35,25 @@ public class MidiNote implements Comparable<MidiNote> {
                 '}';
     }
 
-    public long getTick() {
+    long getTick() {
         return tick;
     }
 
-    public float getKeyMapped(){
+    public float getKeyMapped() {
         int index = Arrays.binarySearch(notesName, this.note);
         // return 32.5 + (65 * index); centered
         return (float) 65 * index;
     }
 
-    public int getChannel() {
+    int getChannel() {
         return channel;
     }
 
-    public int getKey() {
+    int getKey() {
         return key;
     }
 
-    public int getVelocity() {
+    int getVelocity() {
         return velocity;
     }
 
@@ -64,6 +63,6 @@ public class MidiNote implements Comparable<MidiNote> {
 
     @Override
     public int compareTo(MidiNote o) {
-        return (int)(this.tick - o.getTick());
+        return (int) (this.tick - o.getTick());
     }
 }

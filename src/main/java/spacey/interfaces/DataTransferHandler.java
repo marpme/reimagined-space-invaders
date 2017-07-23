@@ -12,8 +12,8 @@ import javax.sound.midi.*;
  */
 public class DataTransferHandler {
 
-    private static DataTransferHandler instance;
     private static final String RECEIVER_NAME = "to Max 1";
+    private static DataTransferHandler instance;
     private Receiver receiver;
 
     private DataTransferHandler() throws MidiUnavailableException {
@@ -22,15 +22,19 @@ public class DataTransferHandler {
             final MidiDevice device = MidiSystem.getMidiDevice(info);
             final String deviceInfo = device.getDeviceInfo().getName();
 
-            if ("to Max 1".equals(deviceInfo)) {
+            if (RECEIVER_NAME.equals(deviceInfo)) {
                 if (!device.isOpen()) device.open();
                 receiver = device.getReceiver();
             }
         }
+        if (receiver == null) {
+            System.err.println("Receiver was not found or isn't available! \n MIDI receiver name: " + RECEIVER_NAME);
+            System.exit(1);
+        }
     }
 
-    public static DataTransferHandler getInstance() throws MidiUnavailableException{
-        if(instance == null){
+    public static DataTransferHandler getInstance() throws MidiUnavailableException {
+        if (instance == null) {
             instance = new DataTransferHandler();
         }
         return instance;

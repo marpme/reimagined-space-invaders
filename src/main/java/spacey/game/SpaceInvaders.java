@@ -1,12 +1,14 @@
 package spacey.game;
 
-import processing.video.Movie;
+import netP5.NetAddress;
+import oscP5.OscMessage;
+import oscP5.OscP5;
+import processing.core.PApplet;
+import processing.core.PImage;
+import processing.core.PShape;
 import spacey.interfaces.OSCListener;
 import spacey.music.MidiTickHandler;
 import spacey.music.NoteComposer;
-import netP5.*;
-import processing.core.*;
-import oscP5.*;
 
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
@@ -17,42 +19,54 @@ import java.util.List;
 
 public class SpaceInvaders extends PApplet {
 
-    public OscP5 oscP5;
-    public NetAddress myRemoteLocation;
-
-    public float x, y;
-    public float velocityX = 0;
-    public float speed = 5;
-
-    private static List<String> resourceList = new LinkedList<>();
-
     private static final String DACING_QUEEN = SpaceInvaders.class.getResource("ABBA_-_Dancing_Queen.mid").getPath();
     private static final String MOZART = SpaceInvaders.class.getResource("sym40-1.mid").getPath();
     private static final String BEVERLY = SpaceInvaders.class.getResource("Movie_Themes_-_Beverly_Hills_Cop_-_Axel's_Theme_by_Harold_Faltermeyer.mid").getPath();
     private static final String BACKSTREET = SpaceInvaders.class.getResource("Backstreet_Boys_I'll_Never_Break_Your_Heart.mid").getPath();
     private static final String KYOTO = SpaceInvaders.class.getResource("Skrillex_Kyoto_(ft._Sirah).mid").getPath();
-
     private static final String SPACER = SpaceInvaders.class.getResource("spacer.svg").getPath();
+    private static final String NOTE = SpaceInvaders.class.getResource("musical-note.svg").getPath();
+    private static final String BG = SpaceInvaders.class.getResource("bg.jpg").getPath();
+    private static List<String> resourceList = new LinkedList<>();
+
+    static {
+        resourceList.addAll(Arrays.asList(DACING_QUEEN, MOZART, BEVERLY, BACKSTREET, KYOTO));
+    }
+
+    private OscP5 oscP5;
+    private NetAddress myRemoteLocation;
+    private float x, y;
+    public float velocityX = 0;
+    public float speed = 5;
+    private PShape spaceMan;
+    private PShape musicNote;
+    private PImage bg;
 
     public static String getNOTE() {
         return NOTE;
     }
 
-    private static final String NOTE = SpaceInvaders.class.getResource("musical-note.svg").getPath();
-    private static final String BG = SpaceInvaders.class.getResource("bg.jpg").getPath();
-
-    private PShape spaceMan;
-    private PShape musicNote;
-    private PImage bg;
-
     public static void main(String... args) {
         PApplet.main(SpaceInvaders.class);
+    }
+
+    private static String getRandomTrack() {
+        int len = resourceList.size();
+        return resourceList.get((int) (Math.random() * len));
+    }
+
+    private static String getSPACER() {
+        return SPACER;
+    }
+
+    public static String getBG() {
+        return BG;
     }
 
     @Override
     public void settings() {
         super.settings();
-        size(845,500);
+        size(845, 500);
     }
 
     @Override
@@ -75,12 +89,12 @@ public class SpaceInvaders extends PApplet {
         x = .50f * this.width;
         y = .92f * this.height;
 
-        try{
+        try {
             Sequence sequence = MidiSystem.getSequence(new File(SpaceInvaders.getRandomTrack()));
             NoteComposer noteComposer = new NoteComposer(sequence);
             MidiTickHandler TickHandler = new MidiTickHandler(noteComposer);
             BlockSpawnHandler spawnHandler = new BlockSpawnHandler(TickHandler);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
         }
@@ -93,10 +107,10 @@ public class SpaceInvaders extends PApplet {
         this.x += velocityX;
 
         fill(94, 232, 215);
-        shape(spaceMan, this.x - spaceMan.width/2f, this.y - spaceMan.height/2f, 85.6f/2f, 68.48f/2f);
+        shape(spaceMan, this.x - spaceMan.width / 2f, this.y - spaceMan.height / 2f, 85.6f / 2f, 68.48f / 2f);
 
         for (int i = Rect.listOfRect.size() - 1; i >= 0; i--) {
-            if(Rect.listOfRect.get(i).isOutOfWindow(this.height))
+            if (Rect.listOfRect.get(i).isOutOfWindow(this.height))
                 Rect.listOfRect.remove(i);
             else
                 break;
@@ -107,28 +121,5 @@ public class SpaceInvaders extends PApplet {
             next.move();
             shape(musicNote, next.x, next.y, 50, 50);
         }
-    }
-
-    public void sendUpdate(float speed) {
-        OscMessage k = new OscMessage("/1/speed");
-        k.add(speed);
-        oscP5.send(k, myRemoteLocation);
-    }
-
-    static {
-        resourceList.addAll(Arrays.asList(DACING_QUEEN ,MOZART, BEVERLY, BACKSTREET, KYOTO));
-    }
-
-    public static String getRandomTrack() {
-        int len = resourceList.size();
-        return resourceList.get((int) (Math.random() * len));
-    }
-
-    public static String getSPACER() {
-        return SPACER;
-    }
-
-    public static String getBG() {
-        return BG;
     }
 }

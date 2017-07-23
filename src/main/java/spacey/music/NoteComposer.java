@@ -1,7 +1,9 @@
 package spacey.music;
 
 import javax.sound.midi.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,13 +25,13 @@ public class NoteComposer {
     private int PPQ;
 
     public NoteComposer(Sequence sequence) throws Exception {
-        Arrays.stream(sequence.getTracks()).collect(Collectors.toList()).forEach(track -> {
+        Arrays.stream(sequence.getTracks()).collect(Collectors.toList()).forEach(track ->
             IntStream.range(0, track.size()).forEach(eventCount -> {
                 MidiMessage message = track.get(eventCount).getMessage();
                 if(message instanceof ShortMessage)
                     addShortMessage((ShortMessage) message, track.get(eventCount).getTick());
-            });
-        });
+            }
+        ));
 
         registerMetaInformation(sequence);
     }
@@ -64,7 +66,7 @@ public class NoteComposer {
         return PPQ;
     }
 
-    public Queue<MidiNote> getNotes() {
+    public PriorityQueue<MidiNote> getNotes() {
         return notes;
     }
 }
