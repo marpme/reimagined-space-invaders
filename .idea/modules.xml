@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/reimagined-space-invaders.iml" filepath="$PROJECT_DIR$/.idea/modules/reimagined-space-invaders.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MUME.iml" filepath="$PROJECT_DIR$/.idea/modules/MUME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MUME_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MUME_main.iml" group="MUME" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MUME_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MUME_test.iml" group="MUME" />
     </modules>
   </component>
 </project>
