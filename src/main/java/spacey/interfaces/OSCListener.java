@@ -1,8 +1,8 @@
 package spacey.interfaces;
 
 import oscP5.OscEventListener;
-import spacey.game.SpaceInvaders;
 import oscP5.OscMessage;
+import spacey.game.SpaceInvaders;
 
 /**
  * Class description ...
@@ -22,16 +22,16 @@ public class OSCListener implements OscEventListener {
 
     @Override
     public void oscEvent(OscMessage theOscMessage) {
-        if(theOscMessage.checkAddress("/1/push2")
+        if (theOscMessage.checkAddress("/1/push2")
                 || theOscMessage.checkAddress("/1/push1")) {
             si.velocityX = 0;
             return;
         }
 
-        if(theOscMessage.checkAddress("/1/push2")) {
-            si.velocityX = 2 * (float)Math.log(si.speed);
-        } else if(theOscMessage.checkAddress("/1/push1")) {
-            si.velocityX = -1 * (2 * (float)Math.log(si.speed));
+        if (theOscMessage.checkAddress("/1/push2")) {
+            si.velocityX = 2 * (float) Math.log(si.speed);
+        } else if (theOscMessage.checkAddress("/1/push1")) {
+            si.velocityX = -1 * (2 * (float) Math.log(si.speed));
         }
     }
 }
