@@ -1,11 +1,14 @@
 package spacey.game;
 
 import netP5.NetAddress;
-import oscP5.OscMessage;
 import oscP5.OscP5;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
+import spacey.game.note.NoteCollisionDetector;
+import spacey.game.note.NoteRemoveHandler;
+import spacey.game.note.NoteShape;
+import spacey.game.note.NoteSpawnHandler;
 import spacey.interfaces.OSCListener;
 import spacey.music.MidiTickHandler;
 import spacey.music.NoteComposer;
@@ -35,12 +38,12 @@ public class SpaceInvaders extends PApplet {
 
     public OscP5 oscP5;
     public NetAddress myRemoteLocation;
-    public float x, y;
     public float velocityX = 0;
     public float speed = 5;
-    private PShape spaceMan;
+    private SpaceMan spaceMan;
     private PShape musicNote;
     private PImage bg;
+    private NoteRemoveHandler removeHandler;
 
     public static String getNOTE() {
         return NOTE;
@@ -76,56 +79,66 @@ public class SpaceInvaders extends PApplet {
         oscP5.addListener(new OSCListener(this));
         myRemoteLocation = new NetAddress("192.168.178.35", 8455);
 
-        spaceMan = this.loadShape(SpaceInvaders.getSPACER());
-        spaceMan.disableStyle();
+        PShape spacer = this.loadShape(SpaceInvaders.getSPACER());
+        spacer.disableStyle();
+        // don't scale down here, will not interfere with the real width and height
+        // spacer.scale(.5f);
+        spaceMan = new SpaceMan(spacer, .50f * this.width, .92f * this.height);
 
         musicNote = this.loadShape(SpaceInvaders.getNOTE());
         musicNote.disableStyle();
         musicNote.setFill(255);
 
-        bg = loadImage(BG);
-
-        rectMode(CENTER);
-        x = .50f * this.width;
-        y = .92f * this.height;
+        bg = loadImage(getBG());
 
         try {
             Sequence sequence = MidiSystem.getSequence(new File(SpaceInvaders.getRandomTrack()));
             NoteComposer noteComposer = new NoteComposer(sequence);
             MidiTickHandler TickHandler = new MidiTickHandler(noteComposer);
-            BlockSpawnHandler.startFactory(TickHandler);
+            NoteSpawnHandler.startFactory(TickHandler);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
         }
+
+        this.removeHandler = new NoteRemoveHandler(this.height);
+        removeHandler.start();
     }
 
     @Override
     public void draw() {
         background(255);
         image(this.bg, 0, 0, this.width, this.height);
-        this.x += velocityX;
+        spaceMan.addXVelocity(velocityX);
+        new NoteCollisionDetector(
+                spaceMan.getCenteredX(),
+                spaceMan.getCenteredY(),
+                spaceMan.getWidth(),
+                spaceMan.getHeight(),
+                NoteShape.listOfNoteShape,
+                spaceMan
+        ).start();
 
         fill(94, 232, 215);
-        shape(spaceMan, this.x - spaceMan.width / 2f, this.y - spaceMan.height / 2f, 85.6f / 2f, 68.48f / 2f);
+        stroke(255);
+        shape(
+                spaceMan.getSpacer(),
+                spaceMan.getCenteredX(),
+                spaceMan.getCenteredY(),
+                spaceMan.getWidth(),
+                spaceMan.getHeight()
+        );
 
-        for (int i = Rect.listOfRect.size() - 1; i >= 0; i--) {
-            if (Rect.listOfRect.get(i).isOutOfWindow(this.height))
-                Rect.listOfRect.remove(i);
-            else
-                break;
-        }
 
         fill(255);
-        for (Rect next : Rect.listOfRect) {
+        for (NoteShape next : NoteShape.listOfNoteShape) {
             next.move();
-            shape(musicNote, next.x, next.y, 50, 50);
+            shape(musicNote, next.getX(), next.getY(), next.getWidth(), next.getHeight());
         }
+
+        textSize(32);
+        fill(0, 102, 153);
+        text("Points: " + (int) spaceMan.getFloatProperty(), 10, 60);
     }
 
-    public void sendUpdate(float speed) {
-        OscMessage k = new OscMessage("/1/speed");
-        k.add(speed);
-        oscP5.send(k, myRemoteLocation);
-    }
 }

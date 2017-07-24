@@ -28,10 +28,10 @@ public class DataTransferHandler {
             }
         }
 
-        if(receiver == null) {
+        /*if(receiver == null) {
             System.err.println("MIDI receiver might not be available at the moment. Please check: " + RECEIVER_NAME);
             System.exit(1);
-        }
+        }*/
 
     }
 
@@ -44,6 +44,6 @@ public class DataTransferHandler {
 
     public void sendMessage(int type, int channel, int key, int velocity) throws InvalidMidiDataException {
         ShortMessage message = new ShortMessage(type, channel, key, velocity);
-        receiver.send(message, -1);
+        if (receiver != null) receiver.send(message, -1);
     }
 }

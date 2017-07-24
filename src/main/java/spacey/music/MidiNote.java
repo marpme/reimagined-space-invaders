@@ -1,10 +1,9 @@
 package spacey.music;
 
 import javax.sound.midi.ShortMessage;
-import java.util.Arrays;
 
 public class MidiNote implements Comparable<MidiNote> {
-    private static String[] notesName = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"};
+    private static String[] notesName = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"}; // 12 notes
     private long tick;
     private int channel;
     private int key;
@@ -18,7 +17,12 @@ public class MidiNote implements Comparable<MidiNote> {
         this.key = key;
         this.velocity = velocity;
         this.cmd = cmd;
-        this.note = notesName[key % notesName.length];
+        /* 0 - 127
+           60 - 72
+           117 %  12
+        if (key >= 60 && key <= 72)
+            this.note = notesName[key % notesName.length];
+        */
     }
 
     public MidiNote(ShortMessage cmd) {
@@ -39,10 +43,11 @@ public class MidiNote implements Comparable<MidiNote> {
         return tick;
     }
 
-    public float getKeyMapped() {
-        int index = Arrays.binarySearch(notesName, this.note);
-        // return 32.5 + (65 * index); centered
-        return (float) 65 * index;
+    public float getKeyMapped() throws NoteOutOfMapException {
+        if (key >= 60 && key <= 72)
+            return (float) 65 * (key % 12);
+        else
+            throw new NoteOutOfMapException();
     }
 
     public int getChannel() {
@@ -57,9 +62,6 @@ public class MidiNote implements Comparable<MidiNote> {
         return velocity;
     }
 
-    public ShortMessage getCmd() {
-        return cmd;
-    }
 
     @Override
     public int compareTo(MidiNote o) {

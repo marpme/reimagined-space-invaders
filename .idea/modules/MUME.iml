@@ -5,15 +5,16 @@
     <content url="file://$MODULE_DIR$/../..">
       <excludeFolder url="file://$MODULE_DIR$/../../.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="video" level="project" />
-    <orderEntry type="library" name="core-3.3.4" level="project" />
-    <orderEntry type="library" name="java-mode-3.3.4-javadoc" level="project" />
-    <orderEntry type="library" name="oscP5" level="project" />
     <orderEntry type="library" name="gstreamer-java" level="project" />
-    <orderEntry type="library" name="jna" level="project" />
     <orderEntry type="library" name="net-3.3.4-javadoc" level="project" />
+    <orderEntry type="library" name="java-mode-3.3.4-javadoc" level="project" />
+    <orderEntry type="library" name="video" level="project" />
+    <orderEntry type="library" name="oscP5" level="project" />
+    <orderEntry type="library" name="jna" level="project" />
+    <orderEntry type="library" name="core-3.3.4" level="project" />
   </component>
 </module>
