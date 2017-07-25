@@ -17,14 +17,14 @@ package spacey.music;
     0x7F	Sequencer specific event
     0x07	Cue point
 */
-public enum MetaTypes {
+public enum MidiMetaTypes {
 
     NOTE_ON(0x90),
     NOTE_OFF(0x80);
 
     private int type;
 
-    MetaTypes(int type) {
+    MidiMetaTypes(int type) {
         this.type = type;
     }
 

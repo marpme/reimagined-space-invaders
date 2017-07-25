@@ -80,10 +80,11 @@ public class MidiTickHandler extends TimerTask {
             try {
 
                 if (mn.getVelocity() == 0) {
-                    max.sendMessage(MetaTypes.NOTE_OFF.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
+                    listeners.forEach(listener -> listener.midiTicked(mn, MidiMetaTypes.NOTE_OFF));
+                    max.sendMessage(MidiMetaTypes.NOTE_OFF.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
                 } else {
-                    listeners.forEach(listener -> listener.midiTicked(mn));
-                    max.sendMessage(MetaTypes.NOTE_ON.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
+                    listeners.forEach(listener -> listener.midiTicked(mn, MidiMetaTypes.NOTE_ON));
+                    max.sendMessage(MidiMetaTypes.NOTE_ON.getType(), mn.getChannel(), mn.getKey(), mn.getVelocity());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Marvin Piekarek (s0556014)
  * @version 1.0
  * @since 06. Jul 2017
+ * @deprecated since ever!
  */
 public class NoteShape {
 
@@ -19,13 +20,15 @@ public class NoteShape {
     private float width;
     private float height;
     private float velocity;
+    private int color;
 
-    public NoteShape(float x, float y, float width, float height, float velocity) {
+    public NoteShape(float x, float y, float width, float height, float velocity, int color) {
         this.x = x;
         this.y = y - height * 2;
         this.width = width;
         this.height = height;
         this.velocity = velocity;
+        this.color = color;
         listOfNoteShape.add(this);
     }
 
@@ -34,7 +37,7 @@ public class NoteShape {
     }
 
     public boolean isOutOfWindow(float height) {
-        return this.y > height;
+        return this.x > height;
     }
 
     public boolean inBounds(float x, float y, float width, float height) {
@@ -72,5 +75,9 @@ public class NoteShape {
 
     public float getY() {
         return y;
+    }
+
+    public int getColor() {
+        return color;
     }
 }

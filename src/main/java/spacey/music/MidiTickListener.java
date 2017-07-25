@@ -9,5 +9,5 @@ package spacey.music;
  * @since 14. Jul 2017
  */
 public interface MidiTickListener {
-    void midiTicked(MidiNote midiNote);
+    void midiTicked(MidiNote mn, MidiMetaTypes mmt);
 }

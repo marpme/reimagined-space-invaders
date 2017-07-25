@@ -18,13 +18,15 @@ import static javax.sound.midi.ShortMessage.NOTE_ON;
  * @version 1.0
  * @since 13. Jul 2017
  */
-public class NoteComposer {
+public class NoteComposer extends Thread {
 
     private PriorityQueue<MidiNote> notes = new PriorityQueue<>();
     private float BPM;
     private int PPQ;
+    private int minimum = Integer.MAX_VALUE, maximum = Integer.MIN_VALUE;
 
     public NoteComposer(Sequence sequence) throws Exception {
+        super();
         Arrays.stream(sequence.getTracks()).collect(Collectors.toList()).forEach(track -> {
             IntStream.range(0, track.size()).forEach(eventCount -> {
                 MidiMessage message = track.get(eventCount).getMessage();
@@ -40,6 +42,10 @@ public class NoteComposer {
         if (isNoteMessage(sm.getCommand())) {
             int key = sm.getData1();
             int velocity = sm.getData2();
+
+            minimum = Math.min(minimum, key);
+            maximum = Math.max(maximum, key);
+
             notes.add(new MidiNote(tick, sm.getChannel(), key, velocity, sm));
         }
     }
@@ -49,6 +55,11 @@ public class NoteComposer {
         Sequencer seq = MidiSystem.getSequencer();
         seq.open();
         seq.setSequence(sequence);
+
+        MidiNote.highestKey = this.maximum;
+        MidiNote.lowestKey = this.minimum;
+        MidiNote.range = this.maximum - this.minimum;
+
         this.BPM = seq.getTempoInBPM();
         this.PPQ = sequence.getResolution();
         seq.close();
@@ -69,4 +80,5 @@ public class NoteComposer {
     public Queue<MidiNote> getNotes() {
         return notes;
     }
+
 }

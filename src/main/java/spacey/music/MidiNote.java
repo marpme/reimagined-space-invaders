@@ -3,30 +3,18 @@ package spacey.music;
 import javax.sound.midi.ShortMessage;
 
 public class MidiNote implements Comparable<MidiNote> {
-    private static String[] notesName = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"}; // 12 notes
+    public final static String[] NOTES_NAME = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"}; // 12 notes
+    public static int highestKey, lowestKey, range;
     private long tick;
     private int channel;
     private int key;
     private int velocity;
-    private String note;
-    private ShortMessage cmd;
 
     public MidiNote(long tick, int channel, int key, int velocity, ShortMessage cmd) {
         this.tick = tick;
         this.channel = channel;
         this.key = key;
         this.velocity = velocity;
-        this.cmd = cmd;
-        /* 0 - 127
-           60 - 72
-           117 %  12
-        if (key >= 60 && key <= 72)
-            this.note = notesName[key % notesName.length];
-        */
-    }
-
-    public MidiNote(ShortMessage cmd) {
-        this.cmd = cmd;
     }
 
     @Override
@@ -44,8 +32,8 @@ public class MidiNote implements Comparable<MidiNote> {
     }
 
     public float getKeyMapped() throws NoteOutOfMapException {
-        if (key >= 60 && key <= 72)
-            return (float) 65 * (key % 12);
+        if(key >= lowestKey && key <= highestKey)
+            return (float) 845/range * (key % range);
         else
             throw new NoteOutOfMapException();
     }

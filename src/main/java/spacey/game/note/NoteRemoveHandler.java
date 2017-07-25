@@ -13,16 +13,15 @@ public class NoteRemoveHandler extends Thread {
     @Override
     public void run() {
         while (true) {
-            Iterator<NoteShape> it = NoteShape.listOfNoteShape.iterator();
-            while (it.hasNext()) {
-                handleNext(it.next());
+            for (NoteLine aListOfNoteShape : NoteLine.movingNotes) {
+                handleNext(aListOfNoteShape);
             }
         }
     }
 
-    public void handleNext(NoteShape shape) {
+    private void handleNext(NoteLine shape) {
         if (shape.isOutOfWindow(this.height)) {
-            NoteShape.listOfNoteShape.remove(shape);
+            NoteLine.movingNotes.remove(shape);
         }
     }
 }
