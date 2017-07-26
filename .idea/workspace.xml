@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea136289-39c7-49b1-acf9-5d30071a04bd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/oscP5.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/MUME.iml" afterPath="$PROJECT_DIR$/.idea/modules/MUME.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/MUME_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/MUME_main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/MUME_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/MUME_test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/ResourcesHandler.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/ResourcesHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/SpaceMan.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/SpaceMan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteCollisionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteCollisionDetector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteLine.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteSpawnHandler.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteSpawnHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/interfaces/OSCListener.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/interfaces/OSCListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/music/MidiMetaTypes.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/music/MidiMetaTypes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/music/MidiNote.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/music/MidiNote.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/spacey/music/NoteOutOfMapException.java" afterPath="$PROJECT_DIR$/src/main/java/spacey/music/NoteOutOfMapException.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -37,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SpaceInvaders.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SpaceInvaders.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="86" column="85" lean-forward="true" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
+            <state relative-caret-position="342">
+              <caret line="87" column="77" lean-forward="false" selection-start-line="87" selection-start-column="77" selection-end-line="87" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/note/NoteSpawnHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="319">
-              <caret line="21" column="130" lean-forward="false" selection-start-line="21" selection-start-column="130" selection-end-line="21" selection-end-column="130" />
+              <caret line="21" column="129" lean-forward="false" selection-start-line="21" selection-start-column="129" selection-end-line="21" selection-end-column="129" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoteRemoveHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NoteRemoveHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/note/NoteRemoveHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -107,11 +93,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DataTransferHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" column="11" lean-forward="false" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NoteComposer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="50" column="84" lean-forward="false" selection-start-line="50" selection-start-column="84" selection-end-line="50" selection-end-column="84" />
+            <state relative-caret-position="308">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -133,20 +129,6 @@
             <state relative-caret-position="510">
               <caret line="32" column="62" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OSCListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/spacey/interfaces/OSCListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#347#348#0" expanded="true" />
-                <element signature="e#374#375#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -554,13 +536,13 @@
         <option value="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteLine.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/game/note/NoteCollisionDetector.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/game/SpaceMan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/interfaces/OSCListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/music/MidiMetaTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/music/MidiNote.java" />
+        <option value="$PROJECT_DIR$/src/main/java/spacey/music/NoteOutOfMapException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java" />
         <option value="$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java" />
-        <option value="$PROJECT_DIR$/src/main/java/spacey/music/NoteOutOfMapException.java" />
       </list>
     </option>
   </component>
@@ -1155,7 +1137,7 @@
       <workItem from="1500999437164" duration="2203000" />
       <workItem from="1501001657418" duration="5824000" />
       <workItem from="1501014939742" duration="1378000" />
-      <workItem from="1501056864859" duration="3973000" />
+      <workItem from="1501056864859" duration="5136000" />
     </task>
     <task id="LOCAL-00001" summary="Adds a bit more of an OOP style.">
       <created>1500883511179</created>
@@ -1171,11 +1153,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500994725560</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Comments the most important parts of the code, Note line is ready for deployment.">
+      <created>1501061545835</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1501061545835</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47962000" />
+    <option name="totallyTimeSpent" value="49125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1224,7 +1213,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adds a bit more of an OOP style." />
     <MESSAGE value="Refactoring the noteshape into a noteline and adding dynamic note ranges." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring the noteshape into a noteline and adding dynamic note ranges." />
+    <MESSAGE value="Comments the most important parts of the code, Note line is ready for deployment." />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments the most important parts of the code, Note line is ready for deployment." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1500,8 +1491,8 @@
         <state relative-caret-position="1139">
           <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
-            <element signature="e#2346#2347#0" expanded="true" />
-            <element signature="e#2375#2376#0" expanded="true" />
+            <element signature="e#2346#2347#0" expanded="false" />
+            <element signature="e#2375#2376#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1511,7 +1502,7 @@
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1520,14 +1511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="55" lean-forward="false" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -1571,24 +1554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="86" column="85" lean-forward="true" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="50" column="84" lean-forward="false" selection-start-line="50" selection-start-column="84" selection-end-line="50" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/spacey/music/MidiTickListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1611,7 +1576,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/note/NoteSpawnHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
-          <caret line="21" column="130" lean-forward="false" selection-start-line="21" selection-start-column="130" selection-end-line="21" selection-end-column="130" />
+          <caret line="21" column="129" lean-forward="false" selection-start-line="21" selection-start-column="129" selection-end-line="21" selection-end-column="129" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1623,6 +1588,32 @@
         <state relative-caret-position="187">
           <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/interfaces/DataTransferHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="11" lean-forward="false" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/music/NoteComposer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/spacey/game/SpaceInvaders.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="87" column="77" lean-forward="false" selection-start-line="87" selection-start-column="77" selection-end-line="87" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

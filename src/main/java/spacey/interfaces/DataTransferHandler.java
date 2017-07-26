@@ -28,10 +28,10 @@ public class DataTransferHandler {
             }
         }
 
-        if (receiver == null) {
+        /*if (receiver == null) {
             System.err.println("MIDI receiver might not be available at the moment. Please check: " + RECEIVER_NAME);
             System.exit(1);
-        }
+        }*/
 
     }
 
