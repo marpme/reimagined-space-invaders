@@ -4,12 +4,23 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import processing.core.PShape;
 
+/**
+ * A public class which is about storing every needed detail of the spaceman
+ * We want to have sorta OOP
+ */
 public class SpaceMan {
 
     private FloatProperty floatProperty = new SimpleFloatProperty(0);
     private PShape spacer;
     private float x, y;
 
+    /**
+     * CTOR
+     *
+     * @param spacer a shape with a spacer inside of it
+     * @param x      the x cord
+     * @param y      the y cord
+     */
     public SpaceMan(PShape spacer, float x, float y) {
         this.spacer = spacer;
         this.x = x;
@@ -20,7 +31,7 @@ public class SpaceMan {
         return floatProperty.get();
     }
 
-    public void addPoints(float floatProperty) {
+    public synchronized void addPoints(float floatProperty) {
         this.floatProperty.set(this.floatProperty.getValue() + floatProperty);
     }
 

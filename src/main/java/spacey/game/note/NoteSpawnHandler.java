@@ -1,18 +1,27 @@
 package spacey.game.note;
 
 
+import netP5.NetAddress;
+import oscP5.OscMessage;
+import oscP5.OscP5;
 import spacey.music.MidiTickHandler;
 import spacey.music.NoteOutOfMapException;
 
 public class NoteSpawnHandler {
 
-    public static void startFactory(MidiTickHandler midiTickHandler) {
+    private static long count = 0;
+
+    public static void startFactory(MidiTickHandler midiTickHandler, int size, OscP5 oscServer, NetAddress remoteLocation) {
         midiTickHandler.addEventListener((midiNote, metaType) -> {
             try {
-                // new NoteShape(65 + midiNote.getKeyMapped(), 0, 65, 65, 10f, midiNote.getKey());
+                count++;
                 float velMapped = mapNumber(midiNote.getVelocity(), 0, 127, 5, 10);
                 new NoteLine(65 + midiNote.getKeyMapped(), 0 ,velMapped, midiNote.getKey(), metaType);
+
+                double percent = count / (double) size;
+                oscServer.send(new OscMessage("/game/finished").add("Percentage finished: " + String.format("%.2f", percent * 100) + "%"), remoteLocation);
             } catch (NoteOutOfMapException e) { /* ignore */ }
+
         });
     }
 

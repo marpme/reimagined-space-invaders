@@ -87,4 +87,8 @@ public class NoteLine {
         return this.right() >= x && this.left() <= x + width
                 && this.bottom() >= y && this.top() <= y + height;
     }
+
+    public float getHeight() {
+        return height;
+    }
 }

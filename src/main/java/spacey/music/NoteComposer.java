@@ -24,8 +24,9 @@ public class NoteComposer extends Thread {
     private float BPM;
     private int PPQ;
     private int minimum = Integer.MAX_VALUE, maximum = Integer.MIN_VALUE;
+    private int windowWidth;
 
-    public NoteComposer(Sequence sequence) throws Exception {
+    public NoteComposer(Sequence sequence, int width) throws Exception {
         super();
         Arrays.stream(sequence.getTracks()).collect(Collectors.toList()).forEach(track -> {
             IntStream.range(0, track.size()).forEach(eventCount -> {
@@ -35,6 +36,7 @@ public class NoteComposer extends Thread {
             });
         });
 
+        this.windowWidth = width;
         registerMetaInformation(sequence);
     }
 
@@ -46,7 +48,7 @@ public class NoteComposer extends Thread {
             minimum = Math.min(minimum, key);
             maximum = Math.max(maximum, key);
 
-            notes.add(new MidiNote(tick, sm.getChannel(), key, velocity, sm));
+            notes.add(new MidiNote(tick, sm.getChannel(), key, velocity, windowWidth));
         }
     }
 

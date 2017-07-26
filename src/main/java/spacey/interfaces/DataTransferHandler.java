@@ -12,7 +12,7 @@ import javax.sound.midi.*;
  */
 public class DataTransferHandler {
 
-    private static final String RECEIVER_NAME = "to Max 1";
+    private static final String RECEIVER_NAME = "to Max";
     private static DataTransferHandler instance;
     private Receiver receiver;
 
@@ -21,17 +21,17 @@ public class DataTransferHandler {
         for (MidiDevice.Info info : infos) {
             final MidiDevice device = MidiSystem.getMidiDevice(info);
             final String deviceInfo = device.getDeviceInfo().getName();
-
+            System.out.println(deviceInfo);
             if (RECEIVER_NAME.equals(deviceInfo)) {
                 if (!device.isOpen()) device.open();
                 receiver = device.getReceiver();
             }
         }
 
-        /*if(receiver == null) {
+        if (receiver == null) {
             System.err.println("MIDI receiver might not be available at the moment. Please check: " + RECEIVER_NAME);
             System.exit(1);
-        }*/
+        }
 
     }
 

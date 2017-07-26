@@ -16,6 +16,8 @@ package spacey.music;
     0x06	Marker text
     0x7F	Sequencer specific event
     0x07	Cue point
+    0x90    Note on
+    0x80    Note off
 */
 public enum MidiMetaTypes {
 
